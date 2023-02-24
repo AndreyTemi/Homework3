@@ -1,14 +1,14 @@
-import com.codeborne.selenide.Condition;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+
 
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
+
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -20,7 +20,7 @@ public class Homework3 {
     }
 
     @Test
-     void test() {
+     void testDemoQaForm() {
        open("https://demoqa.com/automation-practice-form");
        Selenide.executeJavaScript("$('#fixedban').remove()");
        Selenide.executeJavaScript("$('footer').remove()");
@@ -40,7 +40,7 @@ public class Homework3 {
         $("label[for='hobbies-checkbox-1']").click();
         $("label[for='hobbies-checkbox-2']").click();
         $("label[for='hobbies-checkbox-3']").click();
-        File fileToUpload = new File("src/test/img/test.png");
+        File fileToUpload = new File("src/test/resources/test.png");
         $("#uploadPicture").uploadFile(fileToUpload);
         $("#currentAddress").setValue("Adress");
         $("#react-select-3-input").setValue("NCR");
