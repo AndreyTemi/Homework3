@@ -1,3 +1,4 @@
+package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -9,6 +10,7 @@ import java.io.File;
 
 import static com.codeborne.selenide.Condition.*;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -29,14 +31,15 @@ public class Homework3 {
         $("#firstName").setValue("Andrey");
         $("#lastName").setValue("Temirbaev");
         $("#userEmail").setValue("test@test.ru");
-        $("label[for='gender-radio-1']").click(); //$(byText("Male")).click(); // или //  $("#genterWrapper").$(byText("Male")).click();
+        $("label[for='gender-radio-1']").click();
+        $(byText("Male")).click(); // или //  $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("9097776655");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOptionByValue("1999");
         $(".react-datepicker__month-select").selectOptionByValue("5");
         $(".react-datepicker__day.react-datepicker__day--007").click();
-        $("#subjectsInput").setValue("English");
-        $("#react-select-2-option-0").click();
+        $("#subjectsInput").setValue("English").pressEnter();
+       // $("#react-select-2-option-0").click();
         $("label[for='hobbies-checkbox-1']").click();
         $("label[for='hobbies-checkbox-2']").click();
         $("label[for='hobbies-checkbox-3']").click();
