@@ -2,28 +2,40 @@ package pages;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.VerifyResultComponent;
+
 import java.io.File;
-import static com.codeborne.selenide.Condition.text;
+
+import java.util.Arrays;
+
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
-    private SelenideElement ImputFirstName = $("#firstName"),
-                            ImputLastName = $("#lastName"),
-                            ImputUserEmail = $("#userEmail"),
-                            ImputGender = $("label[for='gender-radio-1']"),
-                            ImputUserNumber = $("#userNumber"),
-                            ImputSubjects = $("#subjectsInput"),
-                            ImputCurrentAddress = $("#currentAddress"),
-                            ImputState = $("#react-select-3-input"),
-                            ImputCity = $("#react-select-4-input"),
-                            VerifyModal = $(".modal-body"),
-                            CloseResultTable = $("#closeLargeModal");
+    VerifyResultComponent verifyResultComponent = new VerifyResultComponent();
+    private final SelenideElement InputFirstName = $("#firstName"),
+                            InputLastName = $("#lastName"),
+                            InputUserEmail = $("#userEmail"),
+                            InputGenderMale = $("label[for='gender-radio-1']"),
+                            InputGenderFemale = $("label[for='gender-radio-2']"),
+                            InputGenderOther = $("label[for='gender-radio-3']"),
+                            InputUserNumber = $("#userNumber"),
+                            InputSubjects = $("#subjectsInput"),
+                            InputCurrentAddress = $("#currentAddress"),
+                            InputState = $("#react-select-3-input"),
+                            InputCity = $("#react-select-4-input");
+
 
 
     public RegistrationPage openPage() {
         open("https://demoqa.com/automation-practice-form");
+
+        return this;
+    }
+
+    public RegistrationPage closeBanner() {
         Selenide.executeJavaScript("$('#fixedban').remove()");
         Selenide.executeJavaScript("$('footer').remove()");
 
@@ -31,31 +43,40 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setFirstName(String firstName) {
-        ImputFirstName.setValue(firstName);
+        InputFirstName.setValue(firstName);
 
         return this;
     }
 
     public RegistrationPage setLastName(String lastName) {
-        ImputLastName.setValue(lastName);
+        InputLastName.setValue(lastName);
 
         return this;
     }
 
     public RegistrationPage setUserEmail(String userEmail) {
-        ImputUserEmail.setValue(userEmail);
+        InputUserEmail.setValue(userEmail);
 
         return this;
     }
 
-    public RegistrationPage setGender() {
-        ImputGender.click();
+    public RegistrationPage setGender(String gender) {
+        switch (gender) {
+            case ("male"):
+                InputGenderMale.click();
+                break;
+            case ("female"):
+                InputGenderFemale.click();
+                break;
+            default:
+                InputGenderOther.click();
+        }
 
         return this;
     }
 
-    public RegistrationPage setUserNumber(String userNumber) {
-        ImputUserNumber.setValue(userNumber);
+    public RegistrationPage setUserPhoneNumber(String userNumber) {
+        InputUserNumber.setValue(userNumber);
 
         return this;
     }
@@ -67,59 +88,67 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubjects(String userNumber) {
-        ImputSubjects.setValue(userNumber).pressEnter();
+    public RegistrationPage setSubjects(String subject) {
+        InputSubjects.setValue(subject).pressEnter();
 
         return this;
     }
 
-    public RegistrationPage setHobbies() {
-        $("label[for='hobbies-checkbox-1']").click();
-        $("label[for='hobbies-checkbox-2']").click();
-        $("label[for='hobbies-checkbox-3']").click();
+    public RegistrationPage setHobbies(String[] hobbies) {
+        if (Arrays.asList(hobbies).contains("sports")) {
+            $("label[for='hobbies-checkbox-1']").click();
+        }
+
+        if (Arrays.asList(hobbies).contains("reading")) {
+            $("label[for='hobbies-checkbox-2']").click();
+        }
+
+        if (Arrays.asList(hobbies).contains("music")) {
+            $("label[for='hobbies-checkbox-3']").click();
+        }
 
         return this;
     }
 
-    public RegistrationPage uploadFile() {
-        File fileToUpload = new File("src/test/resources/test.png");
+    public RegistrationPage uploadFile(String path) {
+        File fileToUpload = new File(path);
         $("#uploadPicture").uploadFile(fileToUpload);
 
         return this;
     }
 
     public RegistrationPage setCurrentAddress(String currentAddress) {
-        ImputCurrentAddress.setValue(currentAddress);
+        InputCurrentAddress.setValue(currentAddress);
 
         return this;
     }
 
-    public RegistrationPage setState(String State) {
-        ImputState.setValue(State).pressEnter();
+    public RegistrationPage setState(String state) {
+        InputState.setValue(state).pressEnter();
 
         return this;
     }
 
-    public RegistrationPage setCity(String City) {
-        ImputCity.setValue(City).pressEnter();
+    public RegistrationPage setCity(String city) {
+        InputCity.setValue(city).pressEnter();
 
         return this;
     }
 
-    public RegistrationPage pressSabmint() {
+    public RegistrationPage pressSubmit() {
         $("#submit").click();
 
         return this;
     }
 
-    public RegistrationPage verifyResults(String value) {
-        VerifyModal.shouldHave(text(value));
+    public RegistrationPage verifyResults(String lable, String value) {
+        verifyResultComponent.verifyResultTable(lable, value);
 
         return this;
     }
 
-    public RegistrationPage closeTable() {
-        CloseResultTable.click();
+    public RegistrationPage closeResultTable() {
+        verifyResultComponent.closeTable();
 
         return this;
     }
