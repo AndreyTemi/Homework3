@@ -20,7 +20,9 @@ public class HomeworkPagesTest extends TestBase {
         String state = "NCR";
         String city = "Delhi";
         String gender = "Male";
-        String birthDate = "07 June,1988";
+        String birthDateDay = "07";
+        String birthDateMonth = "June";
+        String birthDateYear = "1988";
         String file = "test.png";
         String hobbies = "Sports, Reading, Music";
 
@@ -31,7 +33,7 @@ public class HomeworkPagesTest extends TestBase {
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
-                .setGender("male")
+                .setGender(gender)
                 .setUserPhoneNumber(userPhoneNumber)
                 .setBirthDay("07", "5", "1988")
                 .setSubjects(subject)
@@ -42,11 +44,10 @@ public class HomeworkPagesTest extends TestBase {
                 .setCity(city)
                 .pressSubmit()
                 .verifyResults("Student Name", firstName + " " + lastName)
-               // .verifyResults(lastName)
                 .verifyResults("Student Email", userEmail)
                 .verifyResults("Gender", gender)
                 .verifyResults("Mobile", userPhoneNumber )
-                .verifyResults("Date of Birth", birthDate)
+                .verifyResults("Date of Birth", birthDateDay + " " + birthDateMonth + "," + birthDateYear)
                 .verifyResults("Subjects", subject)
                 .verifyResults("Hobbies", hobbies)
                 .verifyResults("Picture", file)

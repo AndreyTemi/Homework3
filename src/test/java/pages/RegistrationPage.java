@@ -62,14 +62,15 @@ public class RegistrationPage {
 
     public RegistrationPage setGender(String gender) {
         switch (gender) {
-            case ("male"):
+            case ("Male"):
                 InputGenderMale.click();
                 break;
-            case ("female"):
+            case ("Female"):
                 InputGenderFemale.click();
                 break;
-            default:
+            case ("Other"):
                 InputGenderOther.click();
+                break;
         }
 
         return this;
