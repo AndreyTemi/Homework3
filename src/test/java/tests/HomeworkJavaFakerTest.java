@@ -1,34 +1,48 @@
 package tests;
 
+import com.github.javafaker.Faker;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.VerifyResultPage;
 
-import static com.codeborne.selenide.Selenide.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.codeborne.selenide.Selenide.sleep;
 
 
-public class HomeworkPagesTest extends TestBase {
+public class HomeworkJavaFakerTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     VerifyResultPage verifyResultPage = new VerifyResultPage();
+    Faker faker = new Faker();
     @Test
     void testDemoQaForm() {
-        String firstName = "Andrey";
-        String lastName = "Temirbaev";
-        String userEmail = "test@test.ru";
-        String userPhoneNumber = "9097776655";
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+        String userPhoneNumber = faker.phoneNumber().subscriberNumber(10);
         String subject = "English";
-        String currentAddress = "Address";
+        String currentAddress = faker.address().fullAddress();
         String state = "NCR";
         String city = "Delhi";
-        String gender = "Male";
-        String birthDateDay = "07";
-        String birthDateMonth = "June";
-        String birthDateYear = "1988";
+        String gender = faker.demographic().sex();
+
+        Date birthDate = faker.date().birthday();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd", new Locale("en"));
+        String birthDateDay = sdf.format(birthDate);
+        sdf.applyPattern("MMM");
+        String birthDateMonth = sdf.format(birthDate);
+        sdf.applyPattern("yyyy");
+        String birthDateYear = sdf.format(birthDate);
+
         String file = "test.png";
         String hobbies = "Sports, Reading, Music";
 
         String[] setHobbies = new String[] {"sports", "music", "reading"};
+
 
         registrationPage.openPage()
                 .closeBanner()
@@ -45,7 +59,6 @@ public class HomeworkPagesTest extends TestBase {
                 .setState(state)
                 .setCity(city)
                 .pressSubmit();
-
 
         verifyResultPage.verifyResults("Student Name", firstName + " " + lastName)
                 .verifyResults("Student Email", userEmail)

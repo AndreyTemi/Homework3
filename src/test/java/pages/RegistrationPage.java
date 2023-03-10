@@ -14,7 +14,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
-    VerifyResultComponent verifyResultComponent = new VerifyResultComponent();
     private final SelenideElement InputFirstName = $("#firstName"),
                             InputLastName = $("#lastName"),
                             InputUserEmail = $("#userEmail"),
@@ -141,17 +140,4 @@ public class RegistrationPage {
 
         return this;
     }
-
-    public RegistrationPage verifyResults(String lable, String value) {
-        verifyResultComponent.verifyResultTable(lable, value);
-
-        return this;
-    }
-
-    public RegistrationPage closeResultTable() {
-        verifyResultComponent.closeTable();
-
-        return this;
-    }
-
 }
