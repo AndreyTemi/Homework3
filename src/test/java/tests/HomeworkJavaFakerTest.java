@@ -1,84 +1,50 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.VerifyResultPage;
-import utils.RandomUtils;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class HomeworkJavaFakerTest extends TestBase {
-
     RegistrationPage registrationPage = new RegistrationPage();
     VerifyResultPage verifyResultPage = new VerifyResultPage();
-    RandomUtils randomUtils = new RandomUtils();
-    Faker faker = new Faker();
+    TestDataDemoQA testDataDemoQA = new TestDataDemoQA();
     @Test
     void testDemoQaForm() {
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String userEmail = faker.internet().emailAddress();
-        String userPhoneNumber = faker.phoneNumber().subscriberNumber(10);
-
-        String[] subjects = new String[] {"English", "Arts", "Commerce", "Social Studies", "Accounting", "Hindi"};
-        String subject = randomUtils.getRandomValueFromArray(subjects);
-
-        String currentAddress = faker.address().fullAddress();
-
-        String state = "NCR";
-        String[] cities = new String[] {"Delhi", "Gurgaon", "Noida"};
-        String city = randomUtils.getRandomValueFromArray(cities);
-
-        String gender = faker.demographic().sex();
-
-        Date birthDate = faker.date().birthday();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd", new Locale("en"));
-        String birthDateDay = sdf.format(birthDate);
-        sdf.applyPattern("M");
-        String birthDateMonth = sdf.format(birthDate);
-        sdf.applyPattern("yyyy");
-        String birthDateYear = sdf.format(birthDate);
-
-        String file = "test.png";
-        String hobbies = "Sports, Reading, Music";
-
-        String[] setHobbies = new String[] {"sports", "music", "reading"};
-        String[] namesMonth = new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        testDataDemoQA.setTestData();
 
         registrationPage.openPage()
                 .closeBanner()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setUserEmail(userEmail)
-                .setGender(gender)
-                .setUserPhoneNumber(userPhoneNumber)
-                .setBirthDay(birthDateDay, birthDateMonth, birthDateYear)
-                .setSubjects(subject)
-                .setHobbies(setHobbies)
+                .setFirstName(testDataDemoQA.firstName)
+                .setLastName(testDataDemoQA.lastName)
+                .setUserEmail(testDataDemoQA.userEmail)
+                .setGender(testDataDemoQA.gender)
+                .setUserPhoneNumber(testDataDemoQA.userPhoneNumber)
+                .setBirthDay(testDataDemoQA.birthDateDay, testDataDemoQA.birthDateMonth, testDataDemoQA.birthDateYear)
+                .setSubjects(testDataDemoQA.subject)
+                .setHobbies(testDataDemoQA.setHobbies)
                 .uploadFile("src/test/resources/test.png")
-                .setCurrentAddress(currentAddress)
-                .setState(state)
-                .setCity(city)
+                .setCurrentAddress(testDataDemoQA.currentAddress)
+                .setState(testDataDemoQA.state)
+                .setCity(testDataDemoQA.city)
                 .pressSubmit();
 
-        verifyResultPage.verifyResults("Student Name", firstName + " " + lastName)
-                .verifyResults("Student Email", userEmail)
-                .verifyResults("Gender", gender)
-                .verifyResults("Mobile", userPhoneNumber)
-                .verifyResults("Date of Birth", birthDateDay + " " + namesMonth[Integer.parseInt(birthDateMonth) - 1] + "," + birthDateYear)
-                .verifyResults("Subjects", subject)
-                .verifyResults("Hobbies", hobbies)
-                .verifyResults("Picture", file)
-                .verifyResults("Address", currentAddress)
-                .verifyResults("State and City", state + " " + city)
+        testDataDemoQA.sdf.applyPattern("MMMM");
+        verifyResultPage.verifyResults("Student Name", testDataDemoQA.firstName + " " + testDataDemoQA.lastName)
+                .verifyResults("Student Email", testDataDemoQA.userEmail)
+                .verifyResults("Gender", testDataDemoQA.gender)
+                .verifyResults("Mobile", testDataDemoQA.userPhoneNumber)
+                .verifyResults("Date of Birth", testDataDemoQA.birthDateDay + " " +
+                        testDataDemoQA.sdf.format(testDataDemoQA.birthDate) + "," + testDataDemoQA.birthDateYear)
+                .verifyResults("Subjects", testDataDemoQA.subject)
+                .verifyResults("Hobbies", testDataDemoQA.hobbies)
+                .verifyResults("Picture", testDataDemoQA.file)
+                .verifyResults("Address", testDataDemoQA.currentAddress)
+                .verifyResults("State and City", testDataDemoQA.state + " " + testDataDemoQA.city)
                 .closeResultTable();
 
-        sleep(5000);
+        sleep(1000);
     }
 }
