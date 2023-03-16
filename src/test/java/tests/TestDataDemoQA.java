@@ -13,13 +13,14 @@ public class TestDataDemoQA {
 
     Faker faker = new Faker();
     String firstName, lastName, userEmail, userPhoneNumber, subject, currentAddress, city, state, gender,
-            birthDateDay, birthDateMonth, birthDateYear, file, hobbies;
+            birthDateDay, birthDateMonth, birthDateYear, file;
 
-    String[] subjects, cities, setHobbies;
-    Date birthDate;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd", new Locale("en"));
+    String[] subjects = new String[] {"English", "Arts", "Commerce", "Social Studies", "Accounting", "Hindi"};
+    String[] hobbies = new String[] {"Sports", "Reading", "Music"};
+    Date birthDate = faker.date().birthday();
+
     public void setBirthDate() {
-        birthDate = faker.date().birthday();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd", new Locale("en"));
         birthDateDay = sdf.format(birthDate);
         sdf.applyPattern("M");
         birthDateMonth = sdf.format(birthDate);
@@ -39,18 +40,15 @@ public class TestDataDemoQA {
     }
     public void setTestData()
     {
-        subjects = new String[] {"English", "Arts", "Commerce", "Social Studies", "Accounting", "Hindi"};
-        cities = new String[] {"Delhi", "Gurgaon", "Noida"};
-        setHobbies = new String[] {"sports", "music", "reading"};
+
         file = "test.png";
-        hobbies = "Sports, Reading, Music";
         firstName = faker.name().firstName();
         lastName = faker.name().lastName();
         userEmail = faker.internet().emailAddress();
         userPhoneNumber = faker.phoneNumber().subscriberNumber(10);
         subject = faker.options().option(subjects);
         currentAddress = faker.address().fullAddress();
-        city = faker.options().option(cities);
+
         gender = faker.demographic().sex();
 
         setBirthDate();

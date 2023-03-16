@@ -95,15 +95,15 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setHobbies(String[] hobbies) {
-        if (Arrays.asList(hobbies).contains("sports")) {
+        if (Arrays.asList(hobbies).contains("Sports")) {
             $("label[for='hobbies-checkbox-1']").click();
         }
 
-        if (Arrays.asList(hobbies).contains("reading")) {
+        if (Arrays.asList(hobbies).contains("Reading")) {
             $("label[for='hobbies-checkbox-2']").click();
         }
 
-        if (Arrays.asList(hobbies).contains("music")) {
+        if (Arrays.asList(hobbies).contains("Music")) {
             $("label[for='hobbies-checkbox-3']").click();
         }
 
