@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.VerifyResultPage;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
@@ -28,19 +26,18 @@ public class HomeworkJavaFakerTest extends TestBase {
                 .setBirthDay(testDataDemoQA.birthDateDay, testDataDemoQA.birthDateMonth, testDataDemoQA.birthDateYear)
                 .setSubjects(testDataDemoQA.subject)
                 .setHobbies(testDataDemoQA.hobbies)
-                .uploadFile("src/test/resources/test.png")
+                .uploadFile(testDataDemoQA.pathFile)
                 .setCurrentAddress(testDataDemoQA.currentAddress)
                 .setState(testDataDemoQA.state)
                 .setCity(testDataDemoQA.city)
                 .pressSubmit();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM", new Locale("en"));
         verifyResultPage.verifyResults("Student Name", testDataDemoQA.firstName + " " + testDataDemoQA.lastName)
                 .verifyResults("Student Email", testDataDemoQA.userEmail)
                 .verifyResults("Gender", testDataDemoQA.gender)
                 .verifyResults("Mobile", testDataDemoQA.userPhoneNumber)
                 .verifyResults("Date of Birth", testDataDemoQA.birthDateDay + " " +
-                        sdf.format(testDataDemoQA.birthDate) + "," + testDataDemoQA.birthDateYear)
+                        testDataDemoQA.birthDateMonthName + "," + testDataDemoQA.birthDateYear)
                 .verifyResults("Subjects", testDataDemoQA.subject)
                 .verifyResults("Hobbies", String.join(", ", testDataDemoQA.hobbies))
                 .verifyResults("Picture", testDataDemoQA.file)

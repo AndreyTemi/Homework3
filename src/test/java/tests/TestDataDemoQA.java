@@ -13,7 +13,7 @@ public class TestDataDemoQA {
 
     Faker faker = new Faker();
     String firstName, lastName, userEmail, userPhoneNumber, subject, currentAddress, city, state, gender,
-            birthDateDay, birthDateMonth, birthDateYear, file;
+            birthDateDay, birthDateMonth, birthDateYear, birthDateMonthName, pathFile, file;
 
     String[] subjects = new String[] {"English", "Arts", "Commerce", "Social Studies", "Accounting", "Hindi"};
     String[] hobbies = new String[] {"Sports", "Reading", "Music"};
@@ -24,6 +24,8 @@ public class TestDataDemoQA {
         birthDateDay = sdf.format(birthDate);
         sdf.applyPattern("M");
         birthDateMonth = sdf.format(birthDate);
+        sdf.applyPattern("MMMM");
+        birthDateMonthName = sdf.format(birthDate);
         sdf.applyPattern("yyyy");
         birthDateYear = sdf.format(birthDate);
     }
@@ -42,6 +44,7 @@ public class TestDataDemoQA {
     {
 
         file = "test.png";
+        pathFile = "src/test/resources/" + file;
         firstName = faker.name().firstName();
         lastName = faker.name().lastName();
         userEmail = faker.internet().emailAddress();
