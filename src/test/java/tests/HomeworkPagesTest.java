@@ -7,7 +7,7 @@ import pages.VerifyResultPage;
 
 import static com.codeborne.selenide.Selenide.*;
 
-@Tag("PagesTest")
+@Tag("pages_test")
 public class HomeworkPagesTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();

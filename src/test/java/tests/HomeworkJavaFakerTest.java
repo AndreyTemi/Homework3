@@ -9,7 +9,7 @@ import pages.VerifyResultPage;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
-@Tag("JavaFaker")
+@Tag("java_faker")
 public class HomeworkJavaFakerTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     VerifyResultPage verifyResultPage = new VerifyResultPage();
