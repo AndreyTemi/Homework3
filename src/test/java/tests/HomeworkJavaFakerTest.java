@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.VerifyResultPage;
@@ -12,7 +13,9 @@ public class HomeworkJavaFakerTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     VerifyResultPage verifyResultPage = new VerifyResultPage();
     TestDataDemoQA testDataDemoQA = new TestDataDemoQA();
+
     @Test
+    @DisplayName("Проверка формы регистрации")
     void testDemoQaForm() {
         testDataDemoQA.setTestData();
 
