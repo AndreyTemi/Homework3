@@ -1,12 +1,13 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.VerifyResultPage;
 
 import static com.codeborne.selenide.Selenide.*;
 
-
+@Tag("PagesTest")
 public class HomeworkPagesTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();

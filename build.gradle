@@ -1,3 +1,5 @@
+import java.time.temporal.Temporal
+
 plugins {
     id 'java-library'
     id('io.qameta.allure') version '2.11.2'
@@ -44,4 +46,15 @@ tasks.withType(JavaCompile).configureEach {
 
 test {
     useJUnitPlatform()
+}
+
+task java_faker(type: Test) {
+    useJUnitPlatform {
+        includeTags("java_faker")
+    }
+}
+task pages_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("pages_test")
+    }
 }
