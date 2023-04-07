@@ -52,6 +52,6 @@ public class HomeworkRemoteJavaFakerTest extends TestBaseRemote {
                 .verifyResults("State and City", testDataDemoQA.state + " " + testDataDemoQA.city)
                 .closeResultTable();
 
-        sleep(1000);
+        //sleep(1000);
     }
 }
