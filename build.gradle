@@ -53,6 +53,13 @@ task java_faker(type: Test) {
         includeTags("java_faker")
     }
 }
+
+task java_faker_remote(type: Test) {
+    useJUnitPlatform {
+        includeTags("java_faker_remote")
+    }
+}
+
 task pages_test(type: Test) {
     useJUnitPlatform {
         includeTags("pages_test")
