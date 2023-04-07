@@ -49,8 +49,8 @@ public class HomeworkRemoteJavaFakerTest extends TestBaseRemote {
                 .verifyResults("Hobbies", String.join(", ", testDataDemoQA.hobbies))
                 .verifyResults("Picture", testDataDemoQA.file)
                 .verifyResults("Address", testDataDemoQA.currentAddress)
-                .verifyResults("State and City", testDataDemoQA.state + " " + testDataDemoQA.city)
-                .closeResultTable();
+                .verifyResults("State and City", testDataDemoQA.state + " " + testDataDemoQA.city);
+              //  .closeResultTable();
 
         //sleep(1000);
     }
