@@ -44,9 +44,12 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
     systemProperties(System.getProperties())
+}
+test {
+    useJUnitPlatform()
 }
 
 task java_faker(type: Test) {
