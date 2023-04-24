@@ -1,0 +1,17 @@
+{
+  "base": {
+    "logo": "",
+    "project": "Домашнее задание QAGURU",
+    "environment": "qa.guru",
+    "comment": "Сообщение для @AndreyTemirbaev",
+    "reportLink": "https://jenkins.autotests.cloud",
+    "language": "ru",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "6116181872:AAG8IDy0P6px0u0kKQfDHx68jEeNl9hleOs",
+    "chat": "-1001882612003",
+    "replyTo": ""
+  }
+}

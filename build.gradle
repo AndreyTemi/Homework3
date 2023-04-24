@@ -1,20 +1,78 @@
+import java.time.temporal.Temporal
+
 plugins {
     id 'java-library'
+    id('io.qameta.allure') version '2.11.2'
+}
+
+allure {
+    report {
+        version.set("2.19.0")
+    }
+    adapter { // отвечает за появление папочки build/allure-results
+        aspectjWeaver.set(true) //обработка аннотации @Step
+        frameworks {
+            junit5 { //название фреймворка
+                adapterVersion.set("2.19.0") //версия интеграции фреймворка и Allure
+            }
+        }
+    }
 }
 
 repositories {
     mavenCentral()
 }
 
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
 dependencies {
     testImplementation (
-            "com.codeborne:selenide:6.12.2",
+            "com.codeborne:selenide:6.13.0",
             "org.junit.jupiter:junit-jupiter:5.9.2",
             "org.slf4j:slf4j-simple:2.0.6",
-            "com.github.javafaker:javafaker:1.0.2"
+            "com.github.javafaker:javafaker:1.0.2",
+            "io.qameta.allure:allure-selenide:2.21.0",
+            "io.rest-assured:rest-assured:5.3.0",
+            "io.rest-assured:json-schema-validator:5.3.0"
     )
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+}
 test {
     useJUnitPlatform()
+}
+
+task java_faker(type: Test) {
+    useJUnitPlatform {
+        includeTags("java_faker")
+    }
+}
+
+task java_faker_remote(type: Test) {
+    useJUnitPlatform {
+        includeTags("java_faker_remote")
+    }
+}
+
+task pages_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("pages_test")
+    }
+}
+
+task api_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("api_test")
+    }
 }
