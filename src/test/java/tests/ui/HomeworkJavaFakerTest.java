@@ -1,21 +1,18 @@
-package tests;
+package tests.ui;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
-import pages.RegistrationPageRemote;
 import pages.VerifyResultPage;
-import pages.VerifyResultPageRemote;
-import tests.TestBase;
-import tests.TestDataDemoQA;
+
 
 import static com.codeborne.selenide.Selenide.sleep;
 
-@Tag("java_faker_remote")
-public class HomeworkRemoteJavaFakerTest extends TestBaseRemote {
-    RegistrationPageRemote registrationPageRemote = new RegistrationPageRemote();
-    VerifyResultPageRemote verifyResultPageRemote = new VerifyResultPageRemote();
+@Tag("java_faker")
+public class HomeworkJavaFakerTest extends TestBase {
+    RegistrationPage registrationPage = new RegistrationPage();
+    VerifyResultPage verifyResultPage = new VerifyResultPage();
     TestDataDemoQA testDataDemoQA = new TestDataDemoQA();
 
     @Test
@@ -23,7 +20,7 @@ public class HomeworkRemoteJavaFakerTest extends TestBaseRemote {
     void testDemoQaForm() {
         testDataDemoQA.setTestData();
 
-        registrationPageRemote.openPage()
+        registrationPage.openPage()
                 .closeBanner()
                 .setFirstName(testDataDemoQA.firstName)
                 .setLastName(testDataDemoQA.lastName)
@@ -39,7 +36,7 @@ public class HomeworkRemoteJavaFakerTest extends TestBaseRemote {
                 .setCity(testDataDemoQA.city)
                 .pressSubmit();
 
-        verifyResultPageRemote.verifyResults("Student Name", testDataDemoQA.firstName + " " + testDataDemoQA.lastName)
+        verifyResultPage.verifyResults("Student Name", testDataDemoQA.firstName + " " + testDataDemoQA.lastName)
                 .verifyResults("Student Email", testDataDemoQA.userEmail)
                 .verifyResults("Gender", testDataDemoQA.gender)
                 .verifyResults("Mobile", testDataDemoQA.userPhoneNumber)
@@ -49,9 +46,9 @@ public class HomeworkRemoteJavaFakerTest extends TestBaseRemote {
                 .verifyResults("Hobbies", String.join(", ", testDataDemoQA.hobbies))
                 .verifyResults("Picture", testDataDemoQA.file)
                 .verifyResults("Address", testDataDemoQA.currentAddress)
-                .verifyResults("State and City", testDataDemoQA.state + " " + testDataDemoQA.city);
-              //  .closeResultTable();
+                .verifyResults("State and City", testDataDemoQA.state + " " + testDataDemoQA.city)
+                .closeResultTable();
 
-        //sleep(1000);
+        sleep(1000);
     }
 }
