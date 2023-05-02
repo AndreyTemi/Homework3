@@ -10,14 +10,13 @@ import tests.api.LombokModel.RegisterUnsuccessfulTest.LombokRegisterUnsuccessful
 import tests.api.LombokModel.RegisterUnsuccessfulTest.LombokRegisterUnsuccessfulRs;
 import tests.api.LombokModel.UpdateUsers.LombokUpdateUsersRq;
 import tests.api.LombokModel.UpdateUsers.LombokUpdateUsersRs;
-import static helpers.CustomAllureListener.withCustomTemplates;
+
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.CreatedSpec.createdRequestSpec;
-import static specs.CreatedSpec.createdResponseSpec;
+import static specs.CreatedSpec.*;
 
 @Tag("api_test")
 public class RestApiLombokTests {
@@ -26,15 +25,11 @@ public class RestApiLombokTests {
     @DisplayName("Запрос списка пользователей")
     void lombokListUsersTest () {
 
-        LombokListUsersRs response = step("Запрос", () ->  given()
-                .filter(withCustomTemplates())
-                .log().uri()
+        LombokListUsersRs response = step("Запрос", () ->  given(listUserRequestSpec)
                 .when()
-                .get("https://reqres.in/api/users?page=2")
+                .get()
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(200)
+                .spec(listUserResponseSpec)
                 .extract().as(LombokListUsersRs.class));
 
         step("Проверка ответа", () ->
@@ -73,17 +68,12 @@ public class RestApiLombokTests {
         lombokUpdateUsersRq.setJob("zion resident");
 
        LombokUpdateUsersRs response = step("Запрос", () ->
-               given()
-               .filter(withCustomTemplates())
-                .log().uri()
+               given(updateUsersRequestSpec)
                 .body(lombokUpdateUsersRq)
-                .contentType(JSON)
                 .when()
-                .put("https://reqres.in/api/users/2")
+                .put()
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(200)
+                .spec(updateUsersResponseSpec)
                 .extract().as(LombokUpdateUsersRs.class));
         step("Проверка в ответе имени", () ->
                 assertEquals("morpheus", response.getName()));
@@ -99,17 +89,12 @@ public class RestApiLombokTests {
         lombokRegisterUnsuccessfulRq.setEmail("sydney@fife");
 
         step("Запрос", () ->
-                given()
-                .filter(withCustomTemplates())
-                .log().uri()
+                given(registerUnsuccessfulRequestSpec)
                 .body(lombokRegisterUnsuccessfulRq)
-                .contentType(JSON)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post()
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(400)
+                        .spec(registerUnsuccessfulResponseSpec)
                 .extract().as(LombokRegisterUnsuccessfulRs.class));
 
         step("Проверка ответа", () ->
