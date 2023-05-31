@@ -8,7 +8,6 @@
 * <a href="#jenkins">Запуск тестов в Jenkins</a>
 * <a href="#allure">Отчеты в Allure</a>
 * <a href="#telegram">Уведомления в Telegram с использованием бота</a>
-* <a href="#video">Пример прогона теста в Selenoid</a>
 
 <a id="annotation"></a>
 ## Описание
@@ -104,6 +103,7 @@ https://jenkins.autotests.cloud/job/Temirbaev/42/
 <img src="images/screenshots/Allure1.png">
 </p>
 
+<a id="telegram"></a>
 ## Уведомления в Telegram с использованием бота
 
 <p>
