@@ -2,7 +2,6 @@
 
 ## Содержание
 * <a href="#annotation">Описание</a>
-* <a href="#tools">Технологии и инструменты</a>
 * <a href="#cases">Реализованные проверки</a>
 * <a href="#console">Запуск тестов из терминала</a>
 * <a href="#jenkins">Запуск тестов в Jenkins</a>
@@ -55,12 +54,14 @@ Allure-отчет включает в себя:
 
 :heavy_check_mark: Проверка неудачной регистрации
 
+<a id="console"></a>
 ##  Запуск тестов из терминала
 ### Локальный запуск тестов
 #### WEB
 ./gradlew clean java_faker
 #### API
 ./gradlew clean api_test
+
 
 ### Удаленный запуск тестов
 
