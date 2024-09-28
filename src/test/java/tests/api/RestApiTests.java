@@ -1,5 +1,6 @@
 package tests.api;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ public class RestApiTests {
         Integer expectedTotal = 12;
 
         Integer actualTotal = given()
+                .filter(new AllureRestAssured())
                 .log().uri()
                 .when()
                 .get("https://reqres.in/api/users?page=2")
@@ -37,6 +39,7 @@ public class RestApiTests {
         String body = "{\"name\":\"morpheus\",\"job\":\"leader\"}";
 
         given()
+                .filter(new AllureRestAssured())
                 .log().uri()
                 .body(body)
                 .contentType(JSON)
@@ -56,6 +59,7 @@ public class RestApiTests {
         String body = "{\"name\":\"morpheus\",\"job\":\"zion resident\"}";
 
         given()
+                .filter(new AllureRestAssured())
                 .log().uri()
                 .body(body)
                 .contentType(JSON)
@@ -74,6 +78,7 @@ public class RestApiTests {
     void deleteUsersTest () {
 
         given()
+                .filter(new AllureRestAssured())
                 .log().uri()
                 .when()
                 .delete("https://reqres.in/api/users/2")
@@ -89,6 +94,7 @@ public class RestApiTests {
         String body = "{\"email\":\"sydney@fife\"}";
 
         given()
+                .filter(new AllureRestAssured())
                 .log().uri()
                 .body(body)
                 .contentType(JSON)
@@ -106,6 +112,7 @@ public class RestApiTests {
     void listResourceSchemaTest () {
 
         given()
+                .filter(new AllureRestAssured())
                 .log().uri()
                 .when()
                 .get("https://reqres.in/api/unknown")
